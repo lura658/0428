@@ -25,14 +25,19 @@ function draw() {
 
   // 更新 overlayGraphics
   overlayGraphics.clear(); // 清除之前的內容
-  let circleSize = 15; // 圓的大小
-  for (let x = 0; x < capture.width; x += circleSize) {
-    for (let y = 0; y < capture.height; y += circleSize) {
+  let unitSize = 18; // 單位大小
+  for (let x = 0; x < capture.width; x += unitSize) {
+    for (let y = 0; y < capture.height; y += unitSize) {
       let col = capture.get(x, y); // 獲取 capture 對應位置的顏色
-      let gray = (col[0] + col[1] + col[2]) / 3; // 計算灰階值
-      overlayGraphics.fill(gray); // 設定灰階顏色
+      let g = col[1]; // 保留 G 值
+      let b = 100; // 固定 B 值
+      overlayGraphics.fill(0, g, b); // 設定方框顏色
       overlayGraphics.noStroke();
-      overlayGraphics.ellipse(x + circleSize / 2, y + circleSize / 2, circleSize, circleSize); // 繪製圓形
+      overlayGraphics.rect(x, y, unitSize, unitSize); // 繪製方框
+
+      // 繪製中間的黑色圓
+      overlayGraphics.fill(0); // 黑色
+      overlayGraphics.ellipse(x + unitSize / 2, y + unitSize / 2, 5, 5); // 繪製圓形
     }
   }
 
