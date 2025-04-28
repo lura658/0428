@@ -11,7 +11,13 @@ function setup() {
 
 function draw() {
   background(245, 245, 220); // 確保背景保持米白色
-  image(capture, (width - capture.width) / 2, (height - capture.height) / 2); // 攝影機影像置中
+  
+  // 翻轉影像
+  push(); // 儲存當前繪圖設定
+  translate(width / 2, height / 2); // 將原點移到畫布中心
+  scale(-1, 1); // 水平翻轉影像
+  image(capture, -capture.width / 2, -capture.height / 2); // 繪製翻轉後的影像
+  pop(); // 恢復繪圖設定
 }
 
 function windowResized() {
