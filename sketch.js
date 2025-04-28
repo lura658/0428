@@ -25,12 +25,14 @@ function draw() {
 
   // 更新 overlayGraphics
   overlayGraphics.clear(); // 清除之前的內容
-  for (let x = 0; x < capture.width; x += 20) {
-    for (let y = 0; y < capture.height; y += 20) {
+  let circleSize = 15; // 圓的大小
+  for (let x = 0; x < capture.width; x += circleSize) {
+    for (let y = 0; y < capture.height; y += circleSize) {
       let col = capture.get(x, y); // 獲取 capture 對應位置的顏色
-      overlayGraphics.fill(col);
+      let gray = (col[0] + col[1] + col[2]) / 3; // 計算灰階值
+      overlayGraphics.fill(gray); // 設定灰階顏色
       overlayGraphics.noStroke();
-      overlayGraphics.ellipse(x, y, 15, 15); // 繪製圓形
+      overlayGraphics.ellipse(x + circleSize / 2, y + circleSize / 2, circleSize, circleSize); // 繪製圓形
     }
   }
 
